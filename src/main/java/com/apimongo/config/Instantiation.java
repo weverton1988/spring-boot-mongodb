@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.apimongo.domain.Post;
 import com.apimongo.domain.User;
+import com.apimongo.dto.AuthorDto;
 import com.apimongo.repository.PostRepository;
 import com.apimongo.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner {
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou Viajar para São Paulo", maria);
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou Viajar para São Paulo", new AuthorDto(maria));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDto(maria));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 	}
